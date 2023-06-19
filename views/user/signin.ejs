@@ -1,0 +1,28 @@
+<%- include('user_header') %>
+    <div class="container  pt-100 pb-100">
+        <div class="col-lg-12 justify-content-center d-flex">
+            <form method="post" action="/user/insertSignin" class="signin-formin">
+                <h2 class="text-center mt-2 mb-3">Sign in</h2>
+                <div class=" form-group mb-4">
+                    <input type="text" class="form-control signinput" name="name" placeholder="Enter Name">
+                </div>
+                <div class="form-group mb-4">
+                    <input type="email" class="form-control signinput" name="email" placeholder="Enter Email">
+                </div>
+                <div class="form-group mb-4">
+                    <input type="password" class="form-control signinput" name="password" placeholder="Enter Password">
+                </div>
+                <div class="form-group mb-4">
+                    <input type="password" class="form-control signinput" name="cpassword"
+                        placeholder="Enter Conform Password">
+                </div>
+                <div class="form-group d-flex justify-content-center mb-4">
+                    <input type="submit" value="Sign in" class="btn Loginbtn btn-block">
+                </div>
+                <div class="form-group mb-4">
+                    <a href="/user/login" type="password" style="cursor: pointer;">Log in Account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include('user_footer') %>

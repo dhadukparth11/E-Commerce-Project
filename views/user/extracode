@@ -1,0 +1,75 @@
+<section class="nav container">
+    <ul id="menu">
+        <% for(var cd of cateData){ %>
+            <li class="parent mx-3"><a href="#" class="d-flex flex-column align-items-center"><img
+                        src="<%= cd.avatar %>" height="80px" width="80px" style="object-fit: cover;" alt="">
+                    <p>
+                        <%= cd.category_name %> &raquo;
+                    </p>
+                </a>
+                <ul class="child">
+                    <% for(var sd of subData){ if(cd.id==sd.categoryId){ %>
+                        <li class="parent"><a href="#">
+                                <%= sd.subcategory_name %> &nbsp; &raquo;
+                            </a>
+                            <ul class="child">
+                                <% for(var ed of extraData){ if(cd.id==ed.categoryId && sd.id==ed.subcategoryId){ %>
+                                    <li>
+                                        <a href="/user/products/<%= cd.id %>/<%= sd.id %>/<%= ed.id %>">
+                                            <%= ed.extracategory_name %>
+                                        </a>
+                                    </li>
+                                    <% }} %>
+                            </ul>
+                        </li>
+                        <% } } %>
+                </ul>
+            </li>
+            <% } %>
+    </ul>
+
+</section>
+
+
+
+
+btrand filter
+<div class="border-bottom mb-4 pb-4">
+    <h5 class="font-weight-semi-bold mb-4">Filter by Brand</h5>
+    <% var i=1; for(var bd of brandData){ %>
+
+        <div class="">
+            <input type="checkbox" id="brand<%= i %>" class="brandtypeData" value="<%= bd.id %>">
+            <label for="brand<%= i %>">
+                <%= bd.brand_name %>
+            </label>
+            <span class="badge border font-weight-normal">0</span>
+        </div>
+        <% i++; } %>
+            <% for(var td of typeData){ %>
+
+                <div class="">
+                    <input type="checkbox" id="type" class="brandtypeData" value="<%= td.id %>">
+                    <label for="type">
+                        <%= td.type_name %>
+                    </label>
+                    <span class="badge border font-weight-normal">0</span>
+                </div>
+                <% } %>
+</div>
+
+
+<% if(locals.user){ %>
+    <form method="post" action="/user/addTocart">
+        <input type="hidden" value="<%= locals.user.id %>" name="user_id" />
+        <input type="hidden" value="<%= productData.id %>" name="product_id" />
+        <input type="hidden" value="1" name="quantity" />
+        <a class="btn-action" href="">
+            <ion-icon name="bag-add-outline"></ion-icon>
+        </a>
+    </form>
+    <% } else { %>
+        <a class="btn-action" href="/user/login">
+            <ion-icon name="bag-add-outline"></ion-icon>
+        </a>
+        <% } %>

@@ -1,0 +1,186 @@
+<%- include('user_header') %>
+    <div class="product-container">
+        <div class="container">
+            <!--- SIDEBAR  -->
+            <div class="sidebar  has-scrollbar" data-mobile-menu>
+                <div class="sidebar-category">
+                    <div class="sidebar-top">
+                        <h2 class="sidebar-title">Category</h2>
+                        <button class="sidebar-close-btn" data-mobile-menu-close-btn>
+                            <ion-icon name="close-outline"></ion-icon>
+                        </button>
+                    </div>
+                    <ul class="sidebar-menu-category-list">
+                        <li class="sidebar-menu-category">
+                            <button class="sidebar-accordion-menu" data-accordion-btn>
+                                <div class="menu-title-flex">
+                                    <img src="/images/icons/dress.svg" alt="clothes" width="20" height="20"
+                                        class="menu-title-img">
+                                    <p class="menu-title">Clothes</p>
+                                </div>
+                                <div>
+                                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                                </div>
+                            </button>
+                        </li>
+
+                        <li class="sidebar-menu-category">
+                            <button class="sidebar-accordion-menu" data-accordion-btn>
+                                <div class="menu-title-flex">
+                                    <img src="/images/icons/shoes.svg" alt="footwear" class="menu-title-img" width="20"
+                                        height="20">
+                                    <p class="menu-title">Footwear</p>
+                                </div>
+                                <div>
+                                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="sidebar-menu-category">
+                            <button class="sidebar-accordion-menu" data-accordion-btn>
+                                <div class="menu-title-flex">
+                                    <img src="/images/icons/jewelry.svg" alt="clothes" class="menu-title-img" width="20"
+                                        height="20">
+                                    <p class="menu-title">Jewelry</p>
+                                </div>
+                                <div>
+                                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="sidebar-menu-category">
+                            <button class="sidebar-accordion-menu" data-accordion-btn>
+                                <div class="menu-title-flex">
+                                    <img src="/images/icons/perfume.svg" alt="perfume" class="menu-title-img" width="20"
+                                        height="20">
+                                    <p class="menu-title">Perfume</p>
+                                </div>
+                                <div>
+                                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="sidebar-menu-category">
+                            <button class="sidebar-accordion-menu" data-accordion-btn>
+                                <div class="menu-title-flex">
+                                    <img src="/images/icons/cosmetics.svg" alt="cosmetics" class="menu-title-img"
+                                        width="20" height="20">
+                                    <p class="menu-title">Cosmetics</p>
+                                </div>
+                                <div>
+                                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                                </div>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-showcase">
+                    <h3 class="showcase-heading">best sellers</h3>
+                    <div class="showcase-wrapper">
+                        <div class="showcase-container">
+                            <div class="showcase">
+                                <a href="#" class="showcase-img-box">
+                                    <img src="/images/products/1.jpg" alt="baby fabric shoes" width="75" height="75"
+                                        class="showcase-img">
+                                </a>
+                                <div class="showcase-content">
+                                    <a href="#">
+                                        <h4 class="showcase-title">baby fabric shoes</h4>
+                                    </a>
+                                    <div class="showcase-rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                    <div class="price-box">
+                                        <del>$5.00</del>
+                                        <p class="price">$4.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="product-box">
+                <!--- PRODUCT GRID -->
+
+                <div class="product-main mt-3">
+                    <h2 class="title">New Products</h2>
+                    <div class="product-grid">
+                        <% for(var pd of productData) { %>
+                            <div class="showcase">
+                                <div class="showcase-banner">
+                                    <a href="/user/singleProduct/<%= pd.id %>">
+                                        <img src="<%= pd.image %>" alt="Mens Winter Leathers Jackets" width="215px"
+                                            height="250px" style="object-fit: cover;" class="product-img default">
+                                    </a>
+                                    <a href="/user/singleProduct/<%= pd.id %>">
+                                        <img src="<%= pd.images[0] %>" alt="Mens Winter Leathers Jackets" width="300"
+                                            class="product-img hover">
+                                    </a>
+                                    <!-- <p class="showcase-badge">15%</p> -->
+                                    <div class="showcase-actions">
+                                        <a class="btn-action" href="/user/singleProduct/<%= pd.id %>">
+                                            <ion-icon name="eye-outline"></ion-icon>
+                                        </a>
+                                        <% if(locals.user){ %>
+                                            <form method="post" action="/user/addTocart">
+                                                <input type="hidden" value="<%= locals.user.id %>" name="user_id" />
+                                                <input type="hidden" value="<%= pd.id %>" name="product_id" />
+                                                <input type="hidden" value="1" name="quantity" />
+                                                <a class="btn-action" href="">
+                                                    <ion-icon name="bag-add-outline"></ion-icon>
+                                                </a>
+                                            </form>
+                                            <% } else { %>
+                                                <a class="btn-action" href="/user/login">
+                                                    <ion-icon name="bag-add-outline"></ion-icon>
+                                                </a>
+                                                <% } %>
+                                    </div>
+                                </div>
+                                <div class="showcase-content">
+                                    <a href="" class="showcase-category">
+                                        <%= pd.product_name %>
+                                    </a>
+                                    <a href="javascript:void(0);">
+                                        <h3 class="showcase-title">
+                                            <%= pd.discription %>
+                                        </h3>
+                                    </a>
+                                    <div class="showcase-rating">
+                                        <% for(var i=1; i<=parseInt(pd.rating); i++){ %>
+                                            <ion-icon name="star"></ion-icon>
+                                            <% } %>
+
+                                                <% for(var i=parseInt(pd.rating); i<5; i++){ %>
+                                                    <ion-icon name="star-outline"></ion-icon>
+                                                    <% } %>
+                                    </div>
+                                    <div class="price-box">
+                                        <p class="price">₹<%= pd.price %>
+                                        </p>
+                                        <del>₹<%= pd.old_price %></del>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('user_footer') %>

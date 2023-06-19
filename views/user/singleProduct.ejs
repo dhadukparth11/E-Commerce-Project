@@ -1,0 +1,71 @@
+<%- include('user_header') %>
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-5 pb-5">
+                <div class="singleProduct owl-carousel owl-theme">
+                    <div class="item">
+                        <img class="" src="<%= productData.image %>" width="500px" height="580px"
+                            style="object-fit: cover;" alt="Image">
+                    </div>
+                    <% productData.images.map((v,i)=>{ %>
+                        <div class="item">
+                            <img class="" src="<%= v %>" width="500px" height="580px" style="object-fit: cover;"
+                                alt="Image">
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+            <div class="col-lg-7 pb-5 ">
+                <h3 class="font-weight-semi-bold">
+                    <%= productData.product_name %>
+                </h3>
+                <div class="showcase-rating d-flex flex-row">
+                    <% for(var i=1; i<=parseInt(productData.rating); i++){ %>
+                        <ion-icon class="star" name="star"></ion-icon>
+                        <% } %>
+
+                            <% for(var i=parseInt(productData.rating); i<5; i++){ %>
+                                <ion-icon class="star-outline" name="star-outline"></ion-icon>
+                                <% } %>
+                </div>
+                <p class="fs-3 fw-semibold d-inline-block mt-2">₹<%= productData.price %></p>
+                <p class="fs-5 mb-4 d-inline-block ms-2"><del>₹<%= productData.old_price %></del></p>
+                <p class="mb-2">
+                    <%= productData.discription %>
+                </p>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="input-group quantity me-2" style="width: 130px;">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-minus">
+                                &minus;
+                            </button>
+                        </div>
+                        <input type="text" disabled class="form-control text-center" value="1">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-plus">
+                                &plus;
+                            </button>
+                        </div>
+                    </div>
+                    <% if(locals.user){ %>
+                        <form method="post" action="/user/addTocart">
+                            <input type="hidden" value="<%= locals.user.id %>" name="user_id" />
+                            <input type="hidden" value="<%= productData.id %>" name="product_id" />
+                            <input type="hidden" value="1" name="quantity" />
+                            <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                                Cart</button>
+                        </form>
+                        <% } else { %>
+                            <a href="/user/login" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>
+                                Add To Cart</a>
+                            <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Shop Detail End -->
+
+
+    <%- include('user_footer') %>

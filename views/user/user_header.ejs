@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCommerce Website</title>
+
+    <style>
+        .parent {
+            z-index: 9;
+            display: block;
+            position: relative;
+            float: left;
+            line-height: 30px;
+            border: 1px solid 5px;
+            box-shadow: 0 3px 5px hsla(0, 0%, 0%, 0.1);
+        }
+
+        .parent a {
+            margin: 10px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .parent a img {
+            border-radius: 5px;
+        }
+
+        .parent:hover>ul {
+            display: block;
+            position: absolute;
+        }
+
+        .child {
+            display: none;
+            border: 1px solid 5px;
+            box-shadow: 0 3px 5px hsla(0, 0%, 0%, 0.1);
+        }
+
+        .child li {
+            background-color: white;
+            line-height: 30px;
+            border-bottom: #CCC 1px solid;
+            border-right: #CCC 1px solid;
+            width: 100%;
+            border: 1px solid 5px;
+            box-shadow: 0 3px 5px hsla(0, 0%, 0%, 0.1);
+        }
+
+        .child li a {
+            color: #000000;
+        }
+
+        .nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0px;
+            min-width: 10em;
+        }
+
+        .nav ul ul ul {
+            left: 100%;
+            top: 0;
+            margin-left: 1px;
+        }
+
+        .parent li:hover {
+            background-color: #F0F0F0;
+        }
+
+        .expand {
+            font-size: 12px;
+            float: right;
+            margin-right: 5px;
+        }
+    </style>
+
+    <!--    - favicon  -->
+    <link rel="shortcut icon" href="/images/logo/favicon.ico" type="image/x-icon">
+
+    <!--    - custom css link  -->
+    <link rel="stylesheet" href="/css/style-prefix.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+    <!--   - google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- - HEADER-->
+    <header>
+        <div class="header-main">
+            <div class="container">
+                <a href="/user/" class="header-logo ">
+                    <img src="/images/logo/logo.svg" alt="Anon's logo" width="120" height="36">
+                </a>
+                <div class="header-search-container">
+                    <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
+                    <button class="search-btn">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+                </div>
+                <div class="header-user-actions">
+                    <a class="action-btn" href="/user/cartPage">
+                        <ion-icon name="bag-handle-outline"></ion-icon>
+                        <span class="count">
+                            <% if(cartData!=0){ %>
+                                <%= cartData %>
+                                    <% }else{ %>
+                                        <%= cartData %>
+                                            <% } %>
+                        </span>
+                    </a>
+
+                    <% if(locals.user){ %>
+                        <a class="action-btn d-flex flex-column align-items-center" href="/user/logout">
+                            <p class="fs-6 d-flex flex-column align-items-center">
+                                <p class="fs-6"><%= locals.user.name %></p><p class="fs-6">Logout</p>
+                            </p>
+                        </a>
+                        <% } else { %>
+                            <a class="action-btn d-flex flex-column align-items-center" href="/user/login">
+                                <ion-icon class="fs-3" name="person-outline"></ion-icon>
+                                <p class="fs-6">Login</p>
+                            </a>
+                            <% } %>
+                </div>
+            </div>
+        </div>
+
+        <nav class="desktop-navigation-menu">
+            <div class="container">
+                <ul class="desktop-menu-category-list">
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Home</a>
+                    </li>
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Categories</a>
+                        <div class="dropdown-panel">
+                            <ul class="dropdown-panel-list d-flex">
+                                <% for(var cd of cateData){ %>
+                                    <li class="menu-title mx-3">
+                                        <a href="#" class="category_name"><img src="<%= cd.avatar %>" height="50px"
+                                                width="50px" style="object-fit: cover;" alt="">
+                                            <%= cd.category_name %>
+                                        </a>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Men's</a>
+                        <ul class="dropdown-list">
+                            <li class="dropdown-item">
+                                <a href="#">Shirt</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Women's</a>
+                        <ul class="dropdown-list">
+                            <li class="dropdown-item">
+                                <a href="#">Dress & Frock</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Jewelry</a>
+                        <ul class="dropdown-list">
+                            <li class="dropdown-item">
+                                <a href="#">Earrings</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Perfume</a>
+                        <ul class="dropdown-list">
+                            <li class="dropdown-item">
+                                <a href="#">Clothes Perfume</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Blog</a>
+                    </li>
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Hot Offers</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <section class="nav container">
+            <ul id="menu">
+                <% for(var cd of cateData){ %>
+                    <li class="parent mx-3"><a href="#" class="d-flex flex-column align-items-center"><img
+                                src="<%= cd.avatar %>" height="80px" width="80px" style="object-fit: cover;" alt="">
+                            <p>
+                                <%= cd.category_name %> &raquo;
+                            </p>
+                        </a>
+                        <ul class="child">
+                            <% for(var sd of subData){ if(cd.id==sd.categoryId){ %>
+                                <li class="parent"><a href="#">
+                                        <%= sd.subcategory_name %> &nbsp; &raquo;
+                                    </a>
+                                    <ul class="child">
+                                        <% for(var ed of extraData){ if(cd.id==ed.categoryId &&
+                                            sd.id==ed.subcategoryId){ %>
+                                            <li>
+                                                <a href="/user/products/<%= cd.id %>/<%= sd.id %>/<%= ed.id %>"><%= ed.extracategory_name %>
+                                                </a>
+                                            </li>
+                                            <% }} %>
+                                    </ul>
+                                </li>
+                                <% }} %>
+                        </ul>
+                    </li>
+                    <% } %>
+            </ul>
+
+        </section>
