@@ -5,7 +5,7 @@ const path = require('path')
 
 // const db = require('./config/mongoose');
 const mongoose = require('mongoose');
-const url = `mongodb+srv://dhadukparth11:DHADUK123@cluster0.6laod7v.mongodb.net/?retryWrites=true&w=majority`
+const url = `mongodb+srv://dhadukparth11:DHADUK123@cluster0.6laod7v.mongodb.net/E-Commerce?retryWrites=true`
 
 
 mongoose.connect(url, {
